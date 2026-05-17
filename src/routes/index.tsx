@@ -1,87 +1,68 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
+import { Package, ArrowLeftRight, TrendingUp } from 'lucide-react'
 
-export const Route = createFileRoute('/')({ component: App })
+export const Route = createFileRoute('/')({
+  component: DashboardComponent,
+})
 
-function App() {
+function DashboardComponent() {
   return (
-    <main className="page-wrap px-4 pb-8 pt-14">
-      <section className="island-shell rise-in relative overflow-hidden rounded-[2rem] px-6 py-10 sm:px-10 sm:py-14">
-        <div className="pointer-events-none absolute -left-20 -top-24 h-56 w-56 rounded-full bg-[radial-gradient(circle,rgba(79,184,178,0.32),transparent_66%)]" />
-        <div className="pointer-events-none absolute -bottom-20 -right-20 h-56 w-56 rounded-full bg-[radial-gradient(circle,rgba(47,106,74,0.18),transparent_66%)]" />
-        <p className="island-kicker mb-3">TanStack Start Base Template</p>
-        <h1 className="display-title mb-5 max-w-3xl text-4xl leading-[1.02] font-bold tracking-tight text-[var(--sea-ink)] sm:text-6xl">
-          Start simple, ship quickly.
-        </h1>
-        <p className="mb-8 max-w-2xl text-base text-[var(--sea-ink-soft)] sm:text-lg">
-          This base starter intentionally keeps things light: two routes, clean
-          structure, and the essentials you need to build from scratch.
-        </p>
-        <div className="flex flex-wrap gap-3">
-          <a
-            href="/about"
-            className="rounded-full border border-[rgba(50,143,151,0.3)] bg-[rgba(79,184,178,0.14)] px-5 py-2.5 text-sm font-semibold text-[var(--lagoon-deep)] no-underline transition hover:-translate-y-0.5 hover:bg-[rgba(79,184,178,0.24)]"
-          >
-            About This Starter
-          </a>
-          <a
-            href="https://tanstack.com/router"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full border border-[rgba(23,58,64,0.2)] bg-white/50 px-5 py-2.5 text-sm font-semibold text-[var(--sea-ink)] no-underline transition hover:-translate-y-0.5 hover:border-[rgba(23,58,64,0.35)]"
-          >
-            Router Guide
-          </a>
+    <div className="space-y-8">
+      {/* Header de Boas-vindas */}
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900">Dashboard</h1>
+        <p className="text-slate-500">Bem-vindo ao StockManager. Aqui está o resumo do seu estoque hoje.</p>
+      </div>
+
+      {/* Grid de Cards de Resumo Rápido */}
+      <div className="grid gap-4 md:grid-cols-3">
+        {/* Card 1 - Total de Itens */}
+        <div className="p-6 bg-white rounded-xl border border-slate-200 shadow-sm flex items-center gap-4">
+          <div className="p-3 bg-emerald-50 rounded-lg text-emerald-600">
+            <Package className="h-6 w-6" />
+          </div>
+          <div>
+            <p className="text-sm font-medium text-slate-500 uppercase tracking-wider">Total de Produtos</p>
+            <h3 className="text-2xl font-bold text-slate-900">--</h3>
+          </div>
         </div>
-      </section>
 
-      <section className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {[
-          [
-            'Type-Safe Routing',
-            'Routes and links stay in sync across every page.',
-          ],
-          [
-            'Server Functions',
-            'Call server code from your UI without creating API boilerplate.',
-          ],
-          [
-            'Streaming by Default',
-            'Ship progressively rendered responses for faster experiences.',
-          ],
-          [
-            'Tailwind Native',
-            'Design quickly with utility-first styling and reusable tokens.',
-          ],
-        ].map(([title, desc], index) => (
-          <article
-            key={title}
-            className="island-shell feature-card rise-in rounded-2xl p-5"
-            style={{ animationDelay: `${index * 90 + 80}ms` }}
-          >
-            <h2 className="mb-2 text-base font-semibold text-[var(--sea-ink)]">
-              {title}
-            </h2>
-            <p className="m-0 text-sm text-[var(--sea-ink-soft)]">{desc}</p>
-          </article>
-        ))}
-      </section>
+        {/* Card 2 - Movimentações do Dia */}
+        <div className="p-6 bg-white rounded-xl border border-slate-200 shadow-sm flex items-center gap-4">
+          <div className="p-3 bg-blue-50 rounded-lg text-blue-600">
+            <ArrowLeftRight className="h-6 w-6" />
+          </div>
+          <div>
+            <p className="text-sm font-medium text-slate-500 uppercase tracking-wider">Movimentações (Hoje)</p>
+            <h3 className="text-2xl font-bold text-slate-900">--</h3>
+          </div>
+        </div>
 
-      <section className="island-shell mt-8 rounded-2xl p-6">
-        <p className="island-kicker mb-2">Quick Start</p>
-        <ul className="m-0 list-disc space-y-2 pl-5 text-sm text-[var(--sea-ink-soft)]">
-          <li>
-            Edit <code>src/routes/index.tsx</code> to customize the home page.
-          </li>
-          <li>
-            Update <code>src/components/Header.tsx</code> and{' '}
-            <code>src/components/Footer.tsx</code> for brand links.
-          </li>
-          <li>
-            Add routes in <code>src/routes</code> and tweak visual tokens in{' '}
-            <code>src/styles.css</code>.
-          </li>
-        </ul>
-      </section>
-    </main>
+        {/* Card 3 - Alertas de Estoque Baixo */}
+        <div className="p-6 bg-white rounded-xl border border-slate-200 shadow-sm flex items-center gap-4">
+          <div className="p-3 bg-amber-50 rounded-lg text-amber-600">
+            <TrendingUp className="h-6 w-6" />
+          </div>
+          <div>
+            <p className="text-sm font-medium text-slate-500 uppercase tracking-wider">Alertas de Estoque Baixo</p>
+            <h3 className="text-2xl font-bold text-slate-1000 text-amber-600 font-bold">0</h3>
+          </div>
+        </div>
+      </div>
+
+      {/* Seção Informativa Provisória */}
+      <div className="p-8 bg-slate-900 text-slate-100 rounded-2xl flex flex-col items-center text-center space-y-4 shadow-md">
+        <h2 className="text-xl font-semibold">Pronto para começar?</h2>
+        <p className="text-slate-400 max-w-md text-sm">
+          A estrutura base do front-end está montada. Agora vamos avançar para a listagem real de produtos simulando nossa API.
+        </p>
+        <Link 
+          to="/produtos"
+          className="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-medium text-sm rounded-lg transition-colors"
+        >
+          Ir para Catálogo de Produtos
+        </Link>
+      </div>
+    </div>
   )
 }

@@ -1,8 +1,7 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
-import Footer from '../components/Footer'
-import Header from '../components/Header'
+import { Sidebar } from '../components/Sidebar' // 👈 Importamos nossa Sidebar
 
 import appCss from '../styles.css?url'
 
@@ -11,22 +10,12 @@ const THEME_INIT_SCRIPT = `(function(){try{var stored=window.localStorage.getIte
 export const Route = createRootRoute({
   head: () => ({
     meta: [
-      {
-        charSet: 'utf-8',
-      },
-      {
-        name: 'viewport',
-        content: 'width=device-width, initial-scale=1',
-      },
-      {
-        title: 'TanStack Start Starter',
-      },
+      { charSet: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { title: 'StockManager - Controle de Estoque' }, // 👈 Atualizei o título do seu sistema
     ],
     links: [
-      {
-        rel: 'stylesheet',
-        href: appCss,
-      },
+      { rel: 'stylesheet', href: appCss },
     ],
   }),
   shellComponent: RootDocument,
@@ -34,19 +23,29 @@ export const Route = createRootRoute({
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="pt-BR" suppressHydrationWarning> {/* 👈 Ajustado para português */}
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <HeadContent />
       </head>
-      <body className="font-sans antialiased [overflow-wrap:anywhere] selection:bg-[rgba(79,184,178,0.24)]">
-        <Header />
-        {children}
-        <Footer />
+      <body className="font-sans antialiased bg-slate-50 text-slate-900 selection:bg-[rgba(79,184,178,0.24)]">
+        
+        {/* Envelopamos o conteúdo em um container flexbox para alinhar a Sidebar com as páginas */}
+        <div className="flex min-h-screen">
+          
+          {/* 1. Menu Lateral Fixo */}
+          <Sidebar />
+
+          {/* 2. Área do Conteúdo Principal da Página */}
+          <main className="flex-1 p-8 overflow-y-auto">
+            {children} {/* Aqui o TanStack vai renderizar a página atual (Home, Produtos, etc.) */}
+          </main>
+
+        </div>
+
+        {/* Ferramentas de Desenvolvimento do TanStack (DevTools) */}
         <TanStackDevtools
-          config={{
-            position: 'bottom-right',
-          }}
+          config={{ position: 'bottom-right' }}
           plugins={[
             {
               name: 'Tanstack Router',
