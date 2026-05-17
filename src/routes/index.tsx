@@ -50,19 +50,6 @@ function DashboardComponent() {
         </div>
       </div>
 
-      {/* Seção Informativa Provisória */}
-      <div className="p-8 bg-slate-900 text-slate-100 rounded-2xl flex flex-col items-center text-center space-y-4 shadow-md">
-        <h2 className="text-xl font-semibold">Pronto para começar?</h2>
-        <p className="text-slate-400 max-w-md text-sm">
-          A estrutura base do front-end está montada. Agora vamos avançar para a listagem real de produtos simulando nossa API.
-        </p>
-        <Link 
-          to="/produtos"
-          className="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-medium text-sm rounded-lg transition-colors"
-        >
-          Ir para Catálogo de Produtos
-        </Link>
-      </div>
-    </div>
+  </div>
   )
 }
